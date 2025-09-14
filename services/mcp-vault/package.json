@@ -1,0 +1,7 @@
+{
+  "name": "mcp-vault",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {"dev": "tsx watch src/server.ts"},
+  "dependencies": {"@modelcontextprotocol/sdk": "^1.1.1", "node-fetch": "^3.3.2"}
+}

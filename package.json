@@ -1,0 +1,14 @@
+{
+  "name": "ai-context",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -r \"pnpm -C services/vault-api dev\" \"pnpm -C services/mcp-vault dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "typescript": "^5.6.3",
+    "tsx": "^4.19.2",
+    "@types/node": "^22.5.4"
+  }
+}

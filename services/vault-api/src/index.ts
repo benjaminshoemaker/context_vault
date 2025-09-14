@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.get("/v0/context", (_req, res) => {
   res.json({
-    identity: { fullName: "Ben Shoemaker", emails: ["ben@example.com"], timezone: "America/Los_Angeles" },
+    identity: { fullName: "Benjamin Shoemaker", emails: ["ben.shoemaker.xyz@gmail.com"], timezone: "America/Los_Angeles" },
     prefs: { tone: "concise", units: "imperial", dateFormat: "MM/dd/yyyy" },
     comms: { primaryEmail: "ben@example.com", calendarProvider: "google", availability: [] },
     files: [],

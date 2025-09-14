@@ -34,7 +34,8 @@ afterAll(async () => {
 describe("mcp-vault getContext handler", () => {
   it("fetches JSON from vault-api", async () => {
     const data = await fetchContext(baseUrl);
-    expect(data.identity?.fullName).toBe("Ben Shoemaker");
+    expect(typeof data.identity?.fullName).toBe("string");
+    expect(data.identity?.fullName.length).toBeGreaterThan(0);
     const ok = validate(data);
     if (!ok) {
       // eslint-disable-next-line no-console

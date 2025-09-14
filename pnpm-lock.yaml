@@ -41,9 +41,25 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: ^1.1.1
         version: 1.18.0
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.5
+      express:
+        specifier: ^4.19.2
+        version: 4.21.2
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+    devDependencies:
+      '@types/cors':
+        specifier: ^2.8.17
+        version: 2.8.19
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.23
 
   services/vault-api:
     dependencies:

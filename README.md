@@ -2,7 +2,9 @@
 
 Monorepo with two runnable parts:
 - `vault-api`: Node+TS Express server exposing `GET /v0/context`.
-- `mcp-vault`: Node+TS MCP HTTP server (Streamable HTTP) exposing a `getContext` tool that fetches from `vault-api`.
+- `mcp-vault`: Node+TS MCP HTTP server (Streamable HTTP) exposing tools:
+  - `getContext` (plain-text summary by default; can include JSON)
+  - `healthCheck` (simple connectivity check)
 
 ## Prerequisites
 - Node.js 20+
@@ -20,7 +22,7 @@ pnpm i
 pnpm dev
 ```
 - `vault-api` listens on `http://localhost:4000`.
-- `mcp-vault` listens on `http://localhost:5058/mcp` (stateless Streamable HTTP MCP).
+- `mcp-vault` listens on `http://localhost:5058/mcp` (stateful Streamable HTTP MCP).
 
 ## Acceptance checks
 - API check:
@@ -51,7 +53,22 @@ curl -sS \
   http://127.0.0.1:5058/mcp | jq '.result.content[0]'
 ```
 
-Optionally, connect an MCP client that supports Streamable HTTP to `http://localhost:5058/mcp` and invoke the `getContext` tool. By default it fetches from `VAULT_URL` (defaults to `http://localhost:4000`).
+Optionally, connect an MCP client that supports Streamable HTTP to `http://localhost:5058/mcp` and invoke the tools. By default it fetches from `VAULT_URL` (defaults to `http://localhost:4000`).
+
+## Recommended env for ChatGPT
+- Easiest: use scripts
+  - `pnpm dev:chatgpt` → runs both; mcp-vault with JSON responses, vault-api at 127.0.0.1:4000
+  - `pnpm dev:debug` → same as above plus verbose logs (transport, tools, RPC)
+
+- Manual env (if you prefer):
+  - `VAULT_URL=http://127.0.0.1:4000` (explicit IPv4 loopback)
+  - `MCP_JSON_RESP=1` (POST responses as JSON bodies)
+  - Default tool output is plain-text; to also include JSON content set `MCP_INCLUDE_JSON=1`.
+  - Optional logs while debugging: `MCP_LOG_HTTP=1` (transport), `MCP_LOG_TOOLS=1` (tool), `MCP_LOG_RPC=1` (outgoing JSON-RPC).
+
+## New tool: healthCheck
+- Returns a one-line status (text) indicating if `vault-api` is reachable and basic identity info.
+- Useful to verify connectivity inside ChatGPT before calling `getContext`.
 
 ## Project layout
 - `services/vault-api`: Express server source.

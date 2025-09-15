@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently -r \"pnpm -C services/vault-api dev\" \"pnpm -C services/mcp-vault dev\"",
+    "dev:chatgpt": "concurrently -r \"pnpm -C services/vault-api dev\" \"VAULT_URL=http://127.0.0.1:4000 MCP_JSON_RESP=1 pnpm -C services/mcp-vault dev\"",
+    "dev:debug": "concurrently -r \"pnpm -C services/vault-api dev\" \"VAULT_URL=http://127.0.0.1:4000 MCP_JSON_RESP=1 MCP_LOG_HTTP=1 MCP_LOG_TOOLS=1 MCP_LOG_RPC=1 pnpm -C services/mcp-vault dev\"",
     "test": "vitest --run",
     "test:watch": "vitest"
   },
